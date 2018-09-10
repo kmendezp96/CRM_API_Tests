@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "address": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "address": "string",
+    "city": "string"
+  },
+  "phoneNumber": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "number": "string",
+    "type": "string"
+  },
+  "Email": "string",
+  "SupplierName": "string",
+  "Twitter": "string",
+  "Url": "string"
+}

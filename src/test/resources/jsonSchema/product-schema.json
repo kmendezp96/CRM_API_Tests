@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "Status": "string",
+  "Category": "string",
+  "Description": "string",
+  "WeightUnit": "string",
+  "Quantity": "string",
+  "ProductId": "string",
+  "MainCategory": "string",
+  "Depth": "string",
+  "Name": "string",
+  "CurrencyCode": "string",
+  "DimUnit": "string",
+  "SupplierId": "string",
+  "TaxTarifCode": "string",
+  "UoM": "string",
+  "WeightMeasure": "string",
+  "Price": "string",
+  "Height": "string",
+  "Width": "string"
+}
