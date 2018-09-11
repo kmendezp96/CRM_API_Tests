@@ -70,8 +70,8 @@ public class Customer {
         return "{ \n" +
                 "\"firstName\": \"" + firstName + "\", \n" +
                 "\"lastName\": \"" + lastName + "\", \n" +
-                "\"address\": \"" + address.toString() + "\", \n" +
-                "\"phoneNumber\": \"" + phoneNumber.toString() + "\", \n" +
+                "\"address\": " + address.toString() + ", \n" +
+                "\"phoneNumber\": [" + phoneNumber.toString() + "], \n" +
                 "\"Email\": \"" + email + "\", \n" +
                 "\"age\": \"" + age + "\" \n"  +
                 '}';
