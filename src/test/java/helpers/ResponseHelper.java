@@ -30,7 +30,13 @@ public class ResponseHelper {
         return response;
     }
 
+    public static Response responsePut(String entity){
+        response = given.contentType("application/json").body(entity).when().put(url);
+        return response;
+    }
+
     public static Response resposeGet(){
+        System.out.println(url);
         response = given.contentType("application/json").when().get(url);
         return response;
     }
@@ -42,8 +48,10 @@ public class ResponseHelper {
     private String getKey(String key){
         if(key.equalsIgnoreCase("write permission")){
             return PropertiesHelper.getKeyReadWrite();
-        }else {
+        }else if (key.equalsIgnoreCase("read permission")){
             return PropertiesHelper.getKeyReadOnly();
+        } else{
+            return PropertiesHelper.getKeyAll();
         }
     }
 }

@@ -7,8 +7,8 @@ Feature: create customer
 
   Scenario Outline:  Create a new customer
     When i send a post request with the "<firstName>", "<lastName>", "<address>", "<city>", "<phoneNumber>", "<phoneNumberType>", "<email>" and "<age>"
-    #Then i should see the new "<customer>" in the customers list.
-    Then the system response with a "201" status code
+    Then i should see the new customer in the customers list
+    And the system response with a "200" status code
     Examples:
       | firstName   | lastName    | address              | city        | phoneNumber  | phoneNumberType | email             | age |
       | Juan        | Rodriguez   | 2449  Bassell Avenue | Little Rock | 501-779-1985 | home            | jRodr@gmail.com   | 21  |

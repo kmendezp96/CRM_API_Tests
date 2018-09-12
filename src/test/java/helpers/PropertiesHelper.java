@@ -27,4 +27,8 @@ public class PropertiesHelper {
         return properties.getProperty("keyRW");
     }
 
+    public static String getKeyAll() {
+        return properties.getProperty("keyAll");
+    }
+
 }
