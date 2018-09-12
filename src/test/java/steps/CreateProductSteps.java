@@ -1,11 +1,10 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.When;
+import entities.Product;
 import helpers.ResponseHelper;
+import net.serenitybdd.core.Serenity;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class CreateProductSteps {
 
@@ -15,26 +14,32 @@ public class CreateProductSteps {
                                      String name, String concurrencyCode, String dinUnit, String suppliedrId,
                                      String taxTarifCode, String UoM, String weightMeasure, String price,
                                      String height, String width) {
+        Product product =
+                new Product(status,
+                        category,
+                        description,
+                        weightUnit,
+                        quantity,
+                        productId,
+                        mainCategory,
+                        depth,
+                        name,
+                        concurrencyCode,
+                        dinUnit,
+                        suppliedrId,
+                        taxTarifCode,
+                        UoM,
+                        weightMeasure,
+                        price,
+                        height,
+                        width);
+        ResponseHelper.responsePost(product.toString());
+        Serenity.getCurrentSession().put("product", product);
+    }
 
-        Map<String, String> product = new HashMap<>();
-        product.put("Status", status);
-        product.put("Category", category);
-        product.put("Description", description);
-        product.put("WeightUnit", weightUnit);
-        product.put("Quantity", quantity);
-        product.put("ProductId", productId);
-        product.put("MainCategory", mainCategory);
-        product.put("Depth", depth);
-        product.put("Name", name);
-        product.put("CurrencyCode", concurrencyCode);
-        product.put("DimUnit", dinUnit);
-        product.put("SupplierId", suppliedrId);
-        product.put("TaxTarifCode", taxTarifCode);
-        product.put("UoM", UoM);
-        product.put("WeightMeasure", weightMeasure);
-        product.put("Price", price);
-        product.put("Height", height);
-        product.put("Width", width);
-        ResponseHelper.responsePost(product);
+    @When("^I send a new product with nothing$")
+    public void iSendANewProductWithNothing() {
+        Product product = new Product();
+        ResponseHelper.responsePost(product.toString());
     }
 }

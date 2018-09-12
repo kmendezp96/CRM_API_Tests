@@ -20,6 +20,10 @@ public class Product {
     private	String height;
     private	String width;
 
+    public Product(){
+
+    }
+
     public Product(String status, String category, String description, String weightUnit, String quantity, String productId, String mainCategory, String depth, String name, String currencyCode, String dimUnit, String supplierId, String taxTarifCode, String uoM, String weightMeasure, String price, String height, String width) {
         this.status = status;
         this.category = category;
@@ -188,24 +192,24 @@ public class Product {
     @Override
     public String toString() {
         return "{ \n" +
-                "\"status\": \"" + status + "\", \n" +
-                "\"category\": \"" + category + "\", \n" +
-                "\"description\": \"" + description + "\", \n" +
-                "\"weightUnit\": \"" + weightUnit + "\", \n" +
-                "\"quantity\": \"" + quantity + "\", \n" +
-                "\"productId\": \"" + productId + "\", \n" +
-                "\"mainCategory\": \"" + mainCategory + "\", \n" +
-                "\"depth\": \"" + depth + "\", \n" +
-                "\"name\": \"" + name + "\", \n" +
+                "\"Status\": \"" + status + "\", \n" +
+                "\"Category\": \"" + category + "\", \n" +
+                "\"Description\": \"" + description + "\", \n" +
+                "\"WeightUnit\": \"" + weightUnit + "\", \n" +
+                "\"Quantity\": \"" + quantity + "\", \n" +
+                "\"ProductId\": \"" + productId + "\", \n" +
+                "\"MainCategory\": \"" + mainCategory + "\", \n" +
+                "\"Depth\": \"" + depth + "\", \n" +
+                "\"Name\": \"" + name + "\", \n" +
                 "\"CurrencyCode\": \"" + currencyCode + "\", \n" +
-                "\"dimUnit\": \"" + dimUnit + "\", \n" +
-                "\"supplierId\": \"" + supplierId + "\", \n" +
-                "\"taxTarifCode\": \"" + taxTarifCode + "\", \n" +
-                "\"uoM\": \"" + uoM + "\", \n" +
-                "\"weightMeasure\": \"" + weightMeasure + "\", \n" +
-                "\"price\": \"" + price + "\", \n" +
-                "\"height\": \"" + height + "\", \n" +
-                "\"width\": \"" + width + "\" \n"  +
+                "\"DimUnit\": \"" + dimUnit + "\", \n" +
+                "\"SupplierId\": \"" + supplierId + "\", \n" +
+                "\"TaxTarifCode\": \"" + taxTarifCode + "\", \n" +
+                "\"UoM\": \"" + uoM + "\", \n" +
+                "\"WeightMeasure\": \"" + weightMeasure + "\", \n" +
+                "\"Price\": \"" + price + "\", \n" +
+                "\"Height\": \"" + height + "\", \n" +
+                "\"Width\": \"" + width + "\" \n"  +
                 '}';
 
     }

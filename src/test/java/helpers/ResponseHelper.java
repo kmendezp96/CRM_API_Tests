@@ -5,8 +5,6 @@ import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import java.util.Map;
-
 public class ResponseHelper {
     private static Response response;
     private static RequestSpecification given;
@@ -19,13 +17,23 @@ public class ResponseHelper {
         given = given.header(header);
     }
 
-    public static Response responsePost(Map<String, String> entity){
-        response = given.contentType("application/json").body(entity).when().post(url);
+    public static Response responseDelete(String id){
+        response = given.pathParam("id", id).when().delete(url+"/{id}");
         return response;
     }
 
-    public static Response resposeGet(){
+    public static Response responsePost(String id){
+        response = given.contentType("application/json").when().post(url);
+        return response;
+    }
+
+    public static Response responseGetAll(){
         response = given.contentType("application/json").when().get(url);
+        return response;
+    }
+
+    public static Response responseGetOne(String id){
+        response = given.pathParam("id", id).contentType("application/json").when().get(url+"/{id}");
         return response;
     }
 
