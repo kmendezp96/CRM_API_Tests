@@ -11,8 +11,7 @@ public class DeleteCustomerSteps {
 
     @When("^i delete the customer with\"([^\"]*)\"$")
     public void iDeleteTheCustomerWith(String id) {
-        Response a = ResponseHelper.resposeDelete(id);
-        a.print();
+        ResponseHelper.resposeDelete(id);
     }
 
     @And("^the customer with that \"([^\"]*)\" must not exists$")

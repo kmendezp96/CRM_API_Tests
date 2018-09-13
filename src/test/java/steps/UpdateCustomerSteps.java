@@ -52,12 +52,8 @@ public class UpdateCustomerSteps {
 
     @And("^the customer with that \"([^\"]*)\" must have the updated attributes$")
     public void theCustomerWithThatMustHaveTheUpdatedAttributes(String id) {
-        Response temporalResponse = RestAssured.
-                given().
-                header(new Header(
-                        "x-endpoint-key", PropertiesHelper.getKeyAll()
-                )).contentType("application/json").when().get(PropertiesHelper.getUrl()+"customer/"+id);
-        newCustomer = JsonHelper.getJsonObjectFromResponse(temporalResponse);
+        new ResponseHelper("customer", PropertiesHelper.getKeyReadOnly());
+        newCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.resposeGet(id));
         List<Boolean> equalsAttributes= new ArrayList<>();
         equalsAttributes.add(newCustomer.get("firstName").getAsString().equals(customer.getFirstName()));
         equalsAttributes.add(newCustomer.get("lastName").getAsString().equals(customer.getLastName()));

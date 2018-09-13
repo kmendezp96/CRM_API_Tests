@@ -3,7 +3,7 @@ Feature: update customer
   I want to change the customer attributes
   So i can update the customer with the new information
 
-  Scenario Outline: Update a new customer
+  Scenario Outline: Update a customer
     Given I have access to CRM "customer" service with "all permission"
     And the customer with "<id>" exists
     When i send a put request to specifying the customer "<id>" with the fields "<firstName>", "<lastName>", "<address>", "<city>", "<phoneNumber>", "<phoneNumberType>", "<email>" or "<age>" that want to update

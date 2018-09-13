@@ -41,7 +41,6 @@ public class CreateCustomerSteps {
                         responsePost(customer.toString())).
                 get("id").
                 getAsString();
-        //System.out.println(customer.toString());
 
     }
 

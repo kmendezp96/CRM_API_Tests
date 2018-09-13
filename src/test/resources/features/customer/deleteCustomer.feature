@@ -9,6 +9,5 @@ Feature: delete customer
     Then the system response with a "204" status code
     And the customer with that "<id>" must not exists
     Examples:
-      | id  |
-      | 747b4e0d-882e-4308-bf7b-10ad826cbd3a |
-      #| 4   |
+      | id                                   |
+      | 4c0b6562-d84c-44fd-a92f-2025fa2ef7bc |

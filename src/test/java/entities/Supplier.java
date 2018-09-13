@@ -68,8 +68,8 @@ public class Supplier {
     @Override
     public String toString() {
         return "{ \n" +
-                "\"address\": \"" + address.toString() + "\", \n" +
-                "\"phoneNumber\": \"" + phoneNumber.toString() + "\", \n" +
+                "\"address\": " + address.toString() + ", \n" +
+                "\"phoneNumber\": " + phoneNumber.toString() + ", \n" +
                 "\"Email\": \"" + email + "\", \n" +
                 "\"SupplierName\": \"" + supplierName + "\", \n" +
                 "\"Twitter\": \"" + twitter + "\", \n" +
