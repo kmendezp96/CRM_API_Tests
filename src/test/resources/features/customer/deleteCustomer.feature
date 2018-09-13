@@ -10,4 +10,4 @@ Feature: delete customer
     And the customer with that "<id>" must not exists
     Examples:
       | id                                   |
-      | 1dd72ff9-a743-48c2-a9f9-1985d556b809 |
+      | 973e3bd6-aee8-4764-add1-1e867dddc889 |

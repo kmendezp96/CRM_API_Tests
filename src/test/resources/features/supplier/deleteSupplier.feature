@@ -10,4 +10,4 @@ Feature: delete supplier
     And the supplier with that "<id>" must not exists
     Examples:
       | id  |
-      | 9a77106e-d4fa-4d42-95a6-0d145d6a5f2a |
+      | f574d849-4de3-4542-b0ab-f5dc26a5b339 |

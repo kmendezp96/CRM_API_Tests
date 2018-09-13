@@ -1,7 +1,6 @@
 package steps;
 
 import com.google.gson.JsonObject;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import entities.Address;
@@ -21,7 +20,7 @@ public class UpdateSuppliersSteps {
     Supplier supplier;
     @And("^the supplier with \"([^\"]*)\" exists$")
     public void theSupplierWithExists(String id) {
-        ResponseHelper.resposeGet(id).then().assertThat().statusCode(200);
+        ResponseHelper.responseGet(id).then().assertThat().statusCode(200);
     }
 
     @When("^i send a put request to specifying the supplier \"([^\"]*)\" with the fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\" that want to update$")
@@ -44,7 +43,7 @@ public class UpdateSuppliersSteps {
     @And("^the supplier with that \"([^\"]*)\" must have the updated attributes$")
     public void theSupplierWithThatMustHaveTheUpdatedAttributes(String id) {
         new ResponseHelper("supplier", PropertiesHelper.getKeyReadOnly());
-        JsonObject newSupplier = JsonHelper.getJsonObjectFromResponse(ResponseHelper.resposeGet(id));
+        JsonObject newSupplier = JsonHelper.getJsonObjectFromResponse(ResponseHelper.responseGet(id));
         List<Boolean> equalsAttributes= new ArrayList<>();
         equalsAttributes.add(newSupplier.get("address").getAsJsonObject().get("address").getAsString().equals(supplier.getAddress().getAddress()));
         equalsAttributes.add(newSupplier.get("address").getAsJsonObject().get("city").getAsString().equals(supplier.getAddress().getCity()));

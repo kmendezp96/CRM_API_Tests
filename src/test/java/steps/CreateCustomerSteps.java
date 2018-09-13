@@ -1,9 +1,6 @@
 package steps;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import entities.Address;
@@ -12,11 +9,6 @@ import entities.PhoneNumber;
 import helpers.JsonHelper;
 import helpers.ResponseHelper;
 import org.hamcrest.CoreMatchers;
-
-import java.lang.reflect.Array;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -50,7 +42,7 @@ public class CreateCustomerSteps {
         boolean isInList = false;
         JsonArray customers = JsonHelper.
                                 getJsonObjectFromResponse(
-                                        ResponseHelper.resposeGet()
+                                        ResponseHelper.responseGet()
                                 ).get("data").getAsJsonArray();
         for (int i = 0; i<customers.size();i++){
             if (customers.get(i).getAsJsonObject().get("id").getAsString().equals(id))

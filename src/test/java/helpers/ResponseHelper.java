@@ -19,20 +19,11 @@ public class ResponseHelper {
         given = given.header(header);
     }
 
-    public static Response responseDelete(String id){
-        response = given.pathParam("id", id).when().delete(url+"/{id}");
-        return response;
-    }
 
     public static Response responsePut(String id, String entity){
         response = given.pathParam("id", id).body(entity).contentType("application/json").when().put(url+"/{id}");
         return response;
     }
-
-    /*public static Response responsePut(String entity, String id){
-        response = given.contentType("application/json").body(entity).when().put(url+"/"+id);
-        return response;
-    }*/
 
     public static Response responsePost(String entity){
         response = given.contentType("application/json").body(entity).post(url);
@@ -43,12 +34,8 @@ public class ResponseHelper {
         response = given.contentType("application/json").when().get(url);
         return response;
     }
-    public static Response responsePost(Map<String, String> entity){
-        response = given.contentType("application/json").body(entity).when().post(url);
-        return response;
-    }
 
-    public static Response resposeGet(){
+    public static Response responseGet(){
         response = given.contentType("application/json").when().get(url);
         return response;
     }
@@ -57,13 +44,13 @@ public class ResponseHelper {
             response = given.pathParam("id", id).contentType("application/json").when().get(url + "/{id}");
             return response;
     }
-    public static Response resposeGet(String id){
+    public static Response responseGet(String id){
         response = given.contentType("application/json").when().get(url+"/"+id);
         return response;
     }
 
-    public static Response resposeDelete(String id){
-        response = given.contentType("application/json").when().delete(url+"/"+id);
+    public static Response responseDelete(String id){
+        response = given.pathParam("id", id).when().delete(url+"/{id}");
         return response;
     }
 

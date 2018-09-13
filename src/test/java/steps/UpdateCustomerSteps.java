@@ -1,9 +1,7 @@
 package steps;
 
 import com.google.gson.JsonObject;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import entities.Address;
 import entities.Customer;
@@ -11,16 +9,11 @@ import entities.PhoneNumber;
 import helpers.JsonHelper;
 import helpers.PropertiesHelper;
 import helpers.ResponseHelper;
-import io.restassured.http.Header;
 import org.hamcrest.CoreMatchers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import io.restassured.response.Response;
-import io.restassured.RestAssured;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UpdateCustomerSteps {
@@ -30,7 +23,7 @@ public class UpdateCustomerSteps {
     Customer customer;
     @And("^the customer with \"([^\"]*)\" exists$")
     public void theCustomerWithExists(String id) {
-        originalCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.resposeGet(id));
+        originalCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.responseGet(id));
     }
 
     @When("^i send a put request to specifying the customer \"([^\"]*)\" with the fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" or \"([^\"]*)\" that want to update$")
@@ -53,7 +46,7 @@ public class UpdateCustomerSteps {
     @And("^the customer with that \"([^\"]*)\" must have the updated attributes$")
     public void theCustomerWithThatMustHaveTheUpdatedAttributes(String id) {
         new ResponseHelper("customer", PropertiesHelper.getKeyReadOnly());
-        newCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.resposeGet(id));
+        newCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.responseGet(id));
         List<Boolean> equalsAttributes= new ArrayList<>();
         equalsAttributes.add(newCustomer.get("firstName").getAsString().equals(customer.getFirstName()));
         equalsAttributes.add(newCustomer.get("lastName").getAsString().equals(customer.getLastName()));
