@@ -5,6 +5,9 @@ public class Order {
     private Products products;
     private String customerId;
 
+    public Order() {
+    }
+
     public Order(String status, Products products, String customerId) {
         this.status = status;
         this.products = products;
@@ -39,7 +42,8 @@ public class Order {
     public String toString() {
         return "{ \n" +
                 "\"status\": \"" + status + "\", \n" +
-                "\"products\": \"" + products + "\", \n" +
+                "\"Products\": [" +
+                "\"products\": \"" + products.toString() + "\"], \n" +
                 "\"customerId\": \"" + customerId + "\" \n"  +
                 '}';
     }

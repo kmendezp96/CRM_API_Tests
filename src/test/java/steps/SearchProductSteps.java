@@ -1,17 +1,16 @@
 package steps;
 
-import com.github.fge.jsonschema.cfg.ValidationConfiguration;
-import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
+import entities.Product;
 import helpers.JsonHelper;
-import helpers.PropertiesHelper;
 import helpers.ResponseHelper;
+import net.serenitybdd.core.Serenity;
 
-import static com.github.fge.jsonschema.SchemaVersion.DRAFTV4;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.hamcrest.Matchers.containsString;
 
 public class SearchProductSteps {
 
@@ -27,29 +26,43 @@ public class SearchProductSteps {
 
     @And("^I can see the specified product$")
     public void iCanSeeATheSpecifiedProduct() {
-        JsonSchemaFactory jsonSchemaFactory = JsonSchemaFactory.newBuilder()
-                .setValidationConfiguration(ValidationConfiguration.newBuilder()
-                        .setDefaultVersion(DRAFTV4).freeze()).freeze();
-
         await().atMost(3, SECONDS)
                 .untilAsserted(() -> ResponseHelper.getResponse()
                         .then().assertThat()
                         .body(matchesJsonSchemaInClasspath("jsonSchema/product-schema.json")
-                                .using(jsonSchemaFactory)));
-
+                                .using(JsonHelper.schemaFactory())));
     }
 
     @And("^the system returns all products with specific format$")
     public void theSystemReturnsAllProductsWithSpecificFormat() {
-        JsonSchemaFactory jsonSchemaFactory = JsonSchemaFactory.newBuilder()
-                .setValidationConfiguration(ValidationConfiguration.newBuilder()
-                        .setDefaultVersion(DRAFTV4).freeze()).freeze();
-
-        await().atMost(3, SECONDS)
+         await().atMost(3, SECONDS)
                 .untilAsserted(() -> JsonHelper.getJsonObjectListFromResponse(ResponseHelper.getResponse())
                         .forEach(x -> x.getAsJsonObject()
                                 .equals(matchesJsonSchemaInClasspath("jsonSchema/product-schema.json")
-                                        .using(jsonSchemaFactory))));
+                                        .using(JsonHelper.schemaFactory()))));
+    }
+
+    @And("^Product has the attributes that i set$")
+    public void productHasTheAttributesThatISet() {
+        Product product = (Product) Serenity.getCurrentSession().get("product");
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getStatus()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getCategory()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getDescription()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getWeightUnit()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getQuantity()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getProductId()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getMainCategory()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getDepth()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getName()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getCurrencyCode()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getDimUnit()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getSupplierId()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getTaxTarifCode()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getUoM()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getWeightUnit()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getPrice()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getHeight()));
+        ResponseHelper.getResponse().then().assertThat().body(containsString(product.getWidth()));
     }
 
 }

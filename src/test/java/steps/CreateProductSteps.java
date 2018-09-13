@@ -11,7 +11,7 @@ public class CreateProductSteps {
     @When("^I send a new product with \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
     public void iSendANewProductWithAnd(String status, String category, String description, String weightUnit,
                                      String quantity, String productId, String mainCategory, String depth,
-                                     String name, String concurrencyCode, String dinUnit, String suppliedrId,
+                                     String name, String concurrencyCode, String dimUnit, String suppliedrId,
                                      String taxTarifCode, String UoM, String weightMeasure, String price,
                                      String height, String width) {
         Product product =
@@ -25,7 +25,7 @@ public class CreateProductSteps {
                         depth,
                         name,
                         concurrencyCode,
-                        dinUnit,
+                        dimUnit,
                         suppliedrId,
                         taxTarifCode,
                         UoM,
@@ -42,4 +42,5 @@ public class CreateProductSteps {
         Product product = new Product();
         ResponseHelper.responsePost(product.toString());
     }
+
 }

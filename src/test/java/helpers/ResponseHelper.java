@@ -22,8 +22,13 @@ public class ResponseHelper {
         return response;
     }
 
-    public static Response responsePost(String id){
-        response = given.contentType("application/json").when().post(url);
+    public static Response responsePut(String id, String entity){
+        response = given.pathParam("id", id).body(entity).contentType("application/json").when().put(url+"/{id}");
+        return response;
+    }
+
+    public static Response responsePost(String entity){
+        response = given.contentType("application/json").body(entity).post(url);
         return response;
     }
 
@@ -44,8 +49,10 @@ public class ResponseHelper {
     private String getKey(String key){
         if(key.equalsIgnoreCase("write permission")){
             return PropertiesHelper.getKeyReadWrite();
-        }else {
+        } else if(key.equalsIgnoreCase("only read permission")) {
             return PropertiesHelper.getKeyReadOnly();
+        }else{
+            return PropertiesHelper.getKeyAll();
         }
     }
 }

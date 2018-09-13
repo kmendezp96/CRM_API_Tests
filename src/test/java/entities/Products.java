@@ -4,6 +4,9 @@ public class Products {
     private	String quantity;
     private	String productId;
 
+    public Products(){
+    }
+
     public Products(String quantity, String productId) {
         this.quantity = quantity;
         this.productId = productId;
