@@ -9,24 +9,28 @@ import entities.Address;
 import entities.Customer;
 import entities.PhoneNumber;
 import helpers.JsonHelper;
+import helpers.PropertiesHelper;
 import helpers.ResponseHelper;
+import io.restassured.http.Header;
 import org.hamcrest.CoreMatchers;
-import org.jruby.RubyProcess;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.restassured.response.Response;
+import io.restassured.RestAssured;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class UpdateCustomer {
+public class UpdateCustomerSteps {
 
     JsonObject originalCustomer;
+    JsonObject newCustomer;
     Customer customer;
     @And("^the customer with \"([^\"]*)\" exists$")
     public void theCustomerWithExists(String id) {
-        originalCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.resposeGet());
+        originalCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.resposeGet(id));
     }
 
     @When("^i send a put request to specifying the customer \"([^\"]*)\" with the fields \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" or \"([^\"]*)\" that want to update$")
@@ -35,24 +39,6 @@ public class UpdateCustomer {
                                                                                        String city, String phoneNumber,
                                                                                        String phoneNumberType, String email,
                                                                                        String age) {
-        /*Map<String, String> customer = new HashMap<>();
-        if (!firstName.isEmpty())
-            customer.put("firstName", firstName);
-        if (!lastName.isEmpty())
-            customer.put("lastName", lastName);
-        if (!address.isEmpty())
-            customer.put("address", address);
-        if (!city.isEmpty())
-            customer.put("city", city);
-        if (!phoneNumber.isEmpty())
-            customer.put("phoneNumber", phoneNumber);
-        if (!phoneNumberType.isEmpty())
-            customer.put("phoneNumberType", phoneNumberType);
-        if (!email.isEmpty())
-            customer.put("Email", email);
-        if (age.length()>0)
-            customer.put("age", age);*/
-
         customer = new Customer(
                 firstName,
                 lastName,
@@ -60,33 +46,45 @@ public class UpdateCustomer {
                 new PhoneNumber(phoneNumber,phoneNumberType),
                 email,
                 age);
-        ResponseHelper.responsePut(customer.toString());
-        //System.out.println(ResponseHelper.getResponse().print());
+        ResponseHelper.responsePut(customer.toString(), id);
     }
 
 
     @And("^the customer with that \"([^\"]*)\" must have the updated attributes$")
     public void theCustomerWithThatMustHaveTheUpdatedAttributes(String id) {
-        /*ResponseHelper.resposeGet().print();
-        JsonObject newCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.resposeGet());
+        Response temporalResponse = RestAssured.
+                given().
+                header(new Header(
+                        "x-endpoint-key", PropertiesHelper.getKeyAll()
+                )).contentType("application/json").when().get(PropertiesHelper.getUrl()+"customer/"+id);
+        newCustomer = JsonHelper.getJsonObjectFromResponse(temporalResponse);
         List<Boolean> equalsAttributes= new ArrayList<>();
         equalsAttributes.add(newCustomer.get("firstName").getAsString().equals(customer.getFirstName()));
         equalsAttributes.add(newCustomer.get("lastName").getAsString().equals(customer.getLastName()));
-        equalsAttributes.add(newCustomer.get("address").getAsString().equals(customer.getAddress().toString()));
-        //equalsAttributes.add(newCustomer.get("city").getAsString().equals(customer.getAddress().getCity()));
-        equalsAttributes.add(newCustomer.get("PhoneNumber").getAsString().equals(customer.getPhoneNumber().toString()));
-        equalsAttributes.add(newCustomer.get("Email").getAsString().equals(customer.getEmail()));
-        equalsAttributes.add(newCustomer.get("age").getAsString().equals(customer.getAge()));
-        for (int i = 0; i<equalsAttributes.size();i++){
-            System.out.println(equalsAttributes.get(i));
-        }*/
-        JsonObject newCustomer = JsonHelper.getJsonObjectFromResponse(ResponseHelper.resposeGet());
-        boolean equals = newCustomer.equals(originalCustomer);
-        assertThat("the customer must have the same attributes than before the update request",
-                equals, CoreMatchers.is(false));
+        equalsAttributes.add(newCustomer.get("address").getAsJsonObject().get("address").getAsString().equals(customer.getAddress().getAddress()));
+        equalsAttributes.add(newCustomer.get("address").getAsJsonObject().get("city").getAsString().equals(customer.getAddress().getCity()));
+        equalsAttributes.add( newCustomer.
+                get("phoneNumber").
+                getAsJsonArray().get(0)
+                .getAsJsonObject()
+                .get("number").getAsString().equals(customer.getPhoneNumber().getNumber()));
+        equalsAttributes.add( newCustomer.
+                get("phoneNumber").
+                getAsJsonArray().
+                get(0).
+                getAsJsonObject().
+                get("type").getAsString().equals(customer.getPhoneNumber().getType()));
 
-        /*boolean equals = newCustomer.equals(originalCustomer);
-        assertThat("the customer must have the same attributes than before the update request",
-                equals, CoreMatchers.is(true));*/
+        equalsAttributes.add(newCustomer.get("email").getAsString().equals(customer.getEmail()));
+        equalsAttributes.add(newCustomer.get("age").getAsString().equals(customer.getAge()));
+        boolean equals = true;
+        for (int i = 0; i<equalsAttributes.size();i++){
+            equals = equals && equalsAttributes.get(i);
+        }
+        assertThat("the customer must have the new attributes of the update request",
+                equals, CoreMatchers.is(true));
+
     }
+
+
 }

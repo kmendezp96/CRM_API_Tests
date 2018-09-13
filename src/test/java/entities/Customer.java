@@ -72,7 +72,7 @@ public class Customer {
                 "\"lastName\": \"" + lastName + "\", \n" +
                 "\"address\": " + address.toString() + ", \n" +
                 "\"phoneNumber\": " + phoneNumber.toString() + ", \n" +
-                "\"Email\": \"" + email + "\", \n" +
+                "\"email\": \"" + email + "\", \n" +
                 "\"age\": \"" + age + "\" \n"  +
                 '}';
     }

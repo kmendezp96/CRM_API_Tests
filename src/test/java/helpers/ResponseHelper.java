@@ -30,14 +30,23 @@ public class ResponseHelper {
         return response;
     }
 
-    public static Response responsePut(String entity){
-        response = given.contentType("application/json").body(entity).when().put(url);
+    public static Response responsePut(String entity, String id){
+        response = given.contentType("application/json").body(entity).when().put(url+"/"+id);
         return response;
     }
 
     public static Response resposeGet(){
-        System.out.println(url);
         response = given.contentType("application/json").when().get(url);
+        return response;
+    }
+
+    public static Response resposeGet(String id){
+        response = given.contentType("application/json").when().get(url+"/"+id);
+        return response;
+    }
+
+    public static Response resposeDelete(String id){
+        response = given.contentType("application/json").when().delete(url+"/"+id);
         return response;
     }
 

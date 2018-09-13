@@ -4,11 +4,11 @@ Feature: delete customer
   So the unnecessary customers won't be on the system
 
   Scenario Outline: delete a customer
-    Given I have access to the CRM service with write permissions
-    When i "delete" the customer with"<id>"
-    Then the customer with that "<id>" must not exists
-    And the system respons with "204" status code
+    Given I have access to CRM "customer" service with "all permission"
+    When i delete the customer with"<id>"
+    Then the system response with a "204" status code
+    And the customer with that "<id>" must not exists
     Examples:
       | id  |
-      | 3   |
-      | 4   |
+      | 747b4e0d-882e-4308-bf7b-10ad826cbd3a |
+      #| 4   |
