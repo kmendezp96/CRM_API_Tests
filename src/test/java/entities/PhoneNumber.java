@@ -27,9 +27,9 @@ public class PhoneNumber {
 
     @Override
     public String toString() {
-        return "{ \n" +
+        return "[{ \n" +
                 "\"number\": \"" + number + "\", \n" +
                 "\"type\": \"" + type + "\" \n"  +
-                '}';
+                "}]";
     }
 }

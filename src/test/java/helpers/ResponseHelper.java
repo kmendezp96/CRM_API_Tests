@@ -4,6 +4,8 @@ import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import java.util.Map;
+
 
 public class ResponseHelper {
     private static Response response;
@@ -27,6 +29,11 @@ public class ResponseHelper {
         return response;
     }
 
+    /*public static Response responsePut(String entity, String id){
+        response = given.contentType("application/json").body(entity).when().put(url+"/"+id);
+        return response;
+    }*/
+
     public static Response responsePost(String entity){
         response = given.contentType("application/json").body(entity).post(url);
         return response;
@@ -36,9 +43,27 @@ public class ResponseHelper {
         response = given.contentType("application/json").when().get(url);
         return response;
     }
+    public static Response responsePost(Map<String, String> entity){
+        response = given.contentType("application/json").body(entity).when().post(url);
+        return response;
+    }
+
+    public static Response resposeGet(){
+        response = given.contentType("application/json").when().get(url);
+        return response;
+    }
 
     public static Response responseGetOne(String id){
-        response = given.pathParam("id", id).contentType("application/json").when().get(url+"/{id}");
+            response = given.pathParam("id", id).contentType("application/json").when().get(url + "/{id}");
+            return response;
+    }
+    public static Response resposeGet(String id){
+        response = given.contentType("application/json").when().get(url+"/"+id);
+        return response;
+    }
+
+    public static Response resposeDelete(String id){
+        response = given.contentType("application/json").when().delete(url+"/"+id);
         return response;
     }
 
@@ -49,7 +74,7 @@ public class ResponseHelper {
     private String getKey(String key){
         if(key.equalsIgnoreCase("write permission")){
             return PropertiesHelper.getKeyReadWrite();
-        } else if(key.equalsIgnoreCase("only read permission")) {
+        } else if(key.equalsIgnoreCase("only read permission") || key.equalsIgnoreCase("read permission")) {
             return PropertiesHelper.getKeyReadOnly();
         }else{
             return PropertiesHelper.getKeyAll();

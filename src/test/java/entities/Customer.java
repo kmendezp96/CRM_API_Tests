@@ -70,9 +70,9 @@ public class Customer {
         return "{ \n" +
                 "\"firstName\": \"" + firstName + "\", \n" +
                 "\"lastName\": \"" + lastName + "\", \n" +
-                "\"address\": \"" + address.toString() + "\", \n" +
-                "\"phoneNumber\": \"" + phoneNumber.toString() + "\", \n" +
-                "\"Email\": \"" + email + "\", \n" +
+                "\"address\": " + address.toString() + ", \n" +
+                "\"phoneNumber\": " + phoneNumber.toString() + ", \n" +
+                "\"email\": \"" + email + "\", \n" +
                 "\"age\": \"" + age + "\" \n"  +
                 '}';
     }
