@@ -4,7 +4,7 @@ Feature: Delete a Product
   So product is not available}
 
   Background:
-    Given I have access to CRM "Product" service with "write permission"
+    Given I have access to CRM "Product" service with "all permission"
 
   Scenario Outline: Deleting a valid product
     When I delete the product with: "<productId>"
@@ -12,8 +12,7 @@ Feature: Delete a Product
     And I wont be able to see the product with that "<productId>"
     Examples:
       |productId|
-      |1a3adf91-8cc2-4116-9a8e-adc9b8cec7b8|
-      |312b358b-50e0-46b2-a120-bae14bde17a9|
+      |b8dbaea0-dd97-4215-8094-a12f1cd76225|
 
   Scenario Outline: Deleting an invalid product
     When I delete the product with: "<productId>"

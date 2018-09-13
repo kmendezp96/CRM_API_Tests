@@ -13,8 +13,8 @@ Feature: Select a Product
 
   Scenario Outline: Selecting a valid product
     When I search for product with: "<productId>"
-    Then the system response with a "200" status code
-    And I can see the specified product
+    Then I can see the specified product
+    And the system response with a "200" status code
     Examples:
       |productId|
       |08027ea7-e15c-4f15-86a2-ec8b1a1352e5|
